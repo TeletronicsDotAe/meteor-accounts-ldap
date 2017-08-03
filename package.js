@@ -1,6 +1,6 @@
 Package.describe({
   name: 'typ:accounts-ldap',
-  version: '1.1.0',
+  version: '1.2.0',
   summary: 'Accounts login for LDAP using ldapjs. Supports anonymous DN search & LDAPS.',
   git: 'https://github.com/typ90/meteor-accounts-ldap',
   documentation: 'README.md'
@@ -8,11 +8,12 @@ Package.describe({
 
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.0.3.1');
+  api.versionsFrom('1.4.4.1');
 
   api.use(['templating'], 'client');
-  api.use(['typ:ldapjs@0.7.3'], 'server');
-
+  Npm.depends({
+    ldapjs: '1.0.1'
+  });
 
   api.use('accounts-base', 'server');
   api.imply('accounts-base', ['client', 'server']);

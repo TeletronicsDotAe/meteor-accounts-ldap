@@ -28,11 +28,12 @@ Meteor.loginWithLDAP = function (user, password, customLdapOptions, callback) {
         ldapOptions: customLdapOptions
     });
 
+    
     Accounts.callLoginMethod({
         // Call login method with ldap = true
         // This will hook into our login handler for ldap
         methodArguments: [loginRequest],
-        userCallback: function (error, result) {
+        userCallback: function (error) {
             if (error) {
                 callback && callback(error);
             } else {

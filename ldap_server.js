@@ -1,4 +1,5 @@
 Future = Npm.require('fibers/future');
+MeteorWrapperLdapjs = Npm.require('ldapjs');
 
 // At a minimum, set up LDAP_DEFAULTS.url and .dn according to
 // your needs. url should appear as 'ldap://your.url.here'
@@ -63,11 +64,11 @@ LDAP.create.prototype.ldapCheck = function (options, bindAfterFind) {
 
     if ((options.hasOwnProperty('username') && options.hasOwnProperty('ldapPass')) || !bindAfterFind) {
 
-        var ldapAsyncFut = new Future();
+        const ldapAsyncFut = new Future();
 
 
         // Create ldap client
-        var fullUrl = self.options.url + ':' + self.options.port;
+        const fullUrl = self.options.url + ':' + self.options.port;
         var client = null;
 
         if (self.options.url.indexOf('ldaps://') === 0) {
@@ -243,11 +244,11 @@ Accounts.registerLoginHandler('ldap', function (loginRequest) {
     }
 
     // Instantiate LDAP with options
-    var userOptions = loginRequest.ldapOptions || {};
+    const userOptions = loginRequest.ldapOptions || {};
     Accounts.ldapObj = new LDAP.create(userOptions);
 
     // Call ldapCheck and get response
-    var ldapResponse = Accounts.ldapObj.ldapCheck(loginRequest, true);
+    const ldapResponse = Accounts.ldapObj.ldapCheck(loginRequest, true);
 
     if (ldapResponse.error) {
         return {
